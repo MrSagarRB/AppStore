@@ -1,0 +1,7 @@
+# SwiftPM / build output (installers are published as GitHub Releases instead)
+.build/
+build/
+*.dmg
+*.app
+# macOS
+.DS_Store
