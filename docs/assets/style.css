@@ -140,8 +140,8 @@ h3 { font-size: 1.12rem; font-weight: 650; letter-spacing: -0.01em; }
 
 /* ---------- screenshots ---------- */
 .shot { filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.35)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25)); }
-.shot-wide { margin-top: 56px; }
-.shot-wide img { width: min(1000px, 100%); margin-inline: auto; }
+.shot-wide { margin-top: 44px; }
+.shot-wide img { width: min(720px, 100%); margin-inline: auto; }
 .shot-tall img { max-height: 640px; width: auto; margin-inline: auto; }
 .float { animation: float 7s ease-in-out infinite; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -176,23 +176,37 @@ h3 { font-size: 1.12rem; font-weight: 650; letter-spacing: -0.01em; }
 .feature .ico svg, .ico svg { width: 22px; height: 22px; }
 .feature p { margin: 8px 0 0; color: var(--muted); font-size: 0.96rem; }
 
-/* store: app cards */
-.app-card { display: flex; flex-direction: column; gap: 18px; padding: 30px; position: relative; overflow: hidden; }
+/* store: app cards (the whole card links to the app's page) */
+.app-card { display: flex; flex-direction: column; gap: 16px; padding: 0 0 26px; position: relative; isolation: isolate; overflow: hidden; cursor: pointer; }
 .app-card::before {
-  content: ""; position: absolute; inset: 0; z-index: 0; opacity: 0.55; pointer-events: none;
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0.6;
   background: radial-gradient(520px 220px at 0% 0%, color-mix(in srgb, var(--c1) 22%, transparent), transparent 70%);
 }
-.app-card > * { position: relative; z-index: 1; }
-.app-card .top { display: flex; align-items: center; gap: 18px; }
-.app-card .top img { width: 76px; height: 76px; border-radius: 18px; filter: drop-shadow(0 10px 16px color-mix(in srgb, var(--c1) 40%, transparent)); }
-.app-card h3 { font-size: 1.5rem; letter-spacing: -0.025em; }
+.app-card:hover { border-color: color-mix(in srgb, var(--c1) 55%, var(--border)); }
+.app-card > :not(.app-preview) { margin-inline: 26px; }
+.app-preview {
+  height: 210px; padding-top: 24px; overflow: hidden; display: flex; align-items: flex-start; justify-content: center;
+  background:
+    radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--c1) 38%, transparent), transparent 65%),
+    linear-gradient(180deg, color-mix(in srgb, var(--c1) 16%, var(--card-solid)), color-mix(in srgb, var(--c1) 5%, var(--card-solid)));
+  border-bottom: 1px solid var(--border);
+}
+.app-preview img { width: 84%; height: auto; transition: transform 0.35s ease; filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.35)); }
+.app-card:hover .app-preview img { transform: translateY(-4px) scale(1.02); }
+.app-card .top { display: flex; align-items: center; gap: 16px; }
+.app-card .top img { width: 64px; height: 64px; border-radius: 15px; flex: none; filter: drop-shadow(0 8px 14px color-mix(in srgb, var(--c1) 40%, transparent)); }
+.app-card h3 { font-size: 1.45rem; letter-spacing: -0.025em; }
+.app-card h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }   /* stretched link: covers the card */
 .app-card .tagline { color: var(--muted); font-size: 0.95rem; font-weight: 550; }
-.app-card p { margin: 0; color: var(--muted); }
+.app-card p { margin: 0 26px; color: var(--muted); }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag { padding: 4px 11px; border-radius: 999px; font-size: 0.78rem; font-weight: 600; color: var(--muted); border: 1px solid var(--border); background: var(--card); }
 .app-card .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; padding-top: 6px; }
-.app-card.soon { border-style: dashed; justify-content: center; align-items: center; text-align: center; min-height: 260px; color: var(--muted); }
+.app-card .actions .btn { position: relative; z-index: 2; }   /* buttons stay clickable above the stretched link */
+.app-card.soon { cursor: default; padding: 30px; border-style: dashed; justify-content: center; align-items: center; text-align: center; min-height: 140px; color: var(--muted); }
+.app-card.soon > * { margin-inline: 0; }
 .app-card.soon::before { display: none; }
+.app-card.soon:hover { transform: none; box-shadow: none; border-color: var(--border); }
 
 /* ---------- stats strip ---------- */
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
