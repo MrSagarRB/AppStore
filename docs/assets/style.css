@@ -40,7 +40,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 code, kbd { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; }
 kbd {
@@ -142,6 +142,9 @@ h3 { font-size: 1.12rem; font-weight: 650; letter-spacing: -0.01em; }
 .shot { filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.35)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25)); }
 .shot-wide { margin-top: 44px; }
 .shot-wide img { width: min(720px, 100%); margin-inline: auto; }
+.shot-desk img { border-radius: 24px; }
+.shot-library { margin-top: 0; }
+.shot-library img { width: min(640px, 100%); margin-inline: auto; }
 .shot-tall img { max-height: 640px; width: auto; margin-inline: auto; }
 .float { animation: float 7s ease-in-out infinite; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
@@ -160,7 +163,8 @@ h3 { font-size: 1.12rem; font-weight: 650; letter-spacing: -0.01em; }
 /* ---------- cards & grids ---------- */
 .grid { display: grid; gap: 18px; }
 .grid.features { grid-template-columns: repeat(3, 1fr); }
-.grid.apps { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.grid.apps { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 1000px) { .grid.apps { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px) { .grid.features { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 680px) { .grid.features, .grid.apps { grid-template-columns: 1fr; } }
 .card {
